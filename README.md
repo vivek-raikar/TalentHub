@@ -9,7 +9,7 @@ Built using **Node.js, Express.js, SQLite, HTML, CSS, and JavaScript**, TalentHu
 | Component | Technology |
 |---|---|
 | Backend | Node.js, Express.js |
-| Database | SQLite |
+| Database | SQLite (sql.js) |
 | Frontend | HTML5, CSS3, JavaScript |
 | Authentication | Password Hashing, Session Management |
 | Architecture | Layered Architecture (Router–Service–Repository) |
@@ -23,7 +23,6 @@ TalentHub/
 ├── package-lock.json
 ├── README.md
 ├── server.js
-├── start.bat
 │
 ├── public/
 │   ├── app.js
@@ -90,9 +89,7 @@ TalentHub/
 
 ## 4. Business Logic and Rules
 
-The system implements the following placement-related rules:
-
-**Job Eligibility**
+### Job Eligibility
 
 A student is eligible for a job when all the following conditions are satisfied:
 
@@ -100,13 +97,14 @@ A student is eligible for a job when all the following conditions are satisfied:
 - Active backlogs do not exceed the permitted maximum.
 - Student's branch is included in the job's allowed branches.
 
-**Application Management**
+### Application Management
+
 - A student can apply only once for a particular job.
 - Applications are accepted only before the job deadline.
 - Applications are allowed only for open job listings.
 - Students who have accepted an offer are treated as placed under the implemented one-offer policy.
 
-**Application and Placement Pipeline**
+### Application and Placement Pipeline
 
 ```text
 Applied
@@ -122,7 +120,8 @@ Offer Issued
 Accepted / Declined
 ```
 
-**Role-Based Access**
+### Role-Based Access
+
 - Companies can manage only their own job listings and applicants.
 - Students can access and respond only to their own applications and offers.
 - Placement coordinators can manage relevant placement information.
@@ -142,7 +141,7 @@ TalentHub follows a layered architecture that separates request handling, busine
 
 ### Database
 
-The application uses SQLite for persistent data storage.
+The application uses SQLite through sql.js for persistent data storage.
 
 The database includes the following tables:
 
@@ -155,9 +154,12 @@ The database includes the following tables:
 - interview_slots
 - offers
 
+The database file is generated locally during the first application run.
+
 ## 6. Installation and Execution
 
 ### Prerequisites
+
 - Node.js version 16 or later.
 - npm (included with Node.js).
 
@@ -179,13 +181,11 @@ npm install
 npm start
 ```
 
-Alternatively, run:
+Alternatively:
 
 ```bash
 node server.js
 ```
-
-On Windows, you can also double-click `start.bat`.
 
 **Step 4: Open the application**
 
@@ -194,6 +194,8 @@ Visit the following URL in your browser:
 ```text
 http://localhost:3000
 ```
+
+The server listens on `127.0.0.1`, so the application is accessible locally from the same computer.
 
 To stop the server, press `Ctrl + C` in the terminal.
 
@@ -220,13 +222,13 @@ Students can also create their own accounts through the registration page.
 
 ## 8. Database Initialization and Reset
 
-The SQLite database is stored at:
+The SQLite database is stored locally at:
 
 ```text
 data/talenthub.db
 ```
 
-The database and initial demo data are created during the first application run.
+The database and initial demo data are created automatically during the first application run.
 
 To reset the database and restore the initial demo data:
 
@@ -234,7 +236,13 @@ To reset the database and restore the initial demo data:
 npm run reset-db
 ```
 
-Stop the server before resetting the database, then restart the application.
+Stop the server before resetting the database, then restart the application using:
+
+```bash
+npm start
+```
+
+**Note:** Resetting the database deletes its existing data and restores the initial demo data on the next start.
 
 ## 9. Key Highlights
 
@@ -248,12 +256,8 @@ Stop the server before resetting the database, then restart the application.
 
 ## 10. Project Information
 
-**Project Name:** TalentHub – Campus Placement Management System
-
-**Application Type:** Full-Stack Web Application
-
-**Backend:** Node.js and Express.js
-
-**Database:** SQLite
-
-**Frontend:** HTML, CSS, and JavaScript
+- **Project Name:** TalentHub – Campus Placement Management System
+- **Application Type:** Full-Stack Web Application
+- **Backend:** Node.js and Express.js
+- **Database:** SQLite (sql.js)
+- **Frontend:** HTML, CSS, and JavaScript
